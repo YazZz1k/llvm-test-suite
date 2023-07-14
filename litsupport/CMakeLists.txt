@@ -20,6 +20,7 @@ set(LITSUPPORT_FILES
   modules/run_under.py
   modules/stats.py
   modules/timeit.py
+  modules/run_collect.py
   ../lit.cfg
 )
 set(LITSUPPORT_TARGETS)

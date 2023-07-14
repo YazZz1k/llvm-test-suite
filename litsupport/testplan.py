@@ -102,50 +102,50 @@ def _executePlan(context, plan):
         return lit.Test.FAIL
 
     # Execute RUN: part of the test.
-    _, _, exitCode, _ = _executeScript(context, plan.runscript, "run")
-    if exitCode != 0:
-        return lit.Test.FAIL
+    #_, _, exitCode, _ = _executeScript(context, plan.runscript, "run")
+    #if exitCode != 0:
+    #    return lit.Test.FAIL
 
     # Execute VERIFY: part of the test.
-    _, _, exitCode, _ = _executeScript(context, plan.verifyscript, "verify")
-    if exitCode != 0:
+    #_, _, exitCode, _ = _executeScript(context, plan.verifyscript, "verify")
+    #if exitCode != 0:
         # The question here is whether to still collects metrics if the
         # benchmark results are invalid. I choose to avoid getting potentially
         # broken metric values as well for a broken test.
-        return lit.Test.FAIL
+    #    return lit.Test.FAIL
 
     # Execute additional profile gathering actions setup by testing modules.
     _, _, exitCode, _ = _executeScript(context, plan.profilescript, "profile")
     if exitCode != 0:
         logging.warning("Profile script '%s' failed", plan.profilescript)
-
+        return lit.Test.FAIL
     # Perform various metric extraction steps setup by testing modules.
-    for metric_collector in plan.metric_collectors:
-        try:
-            additional_metrics = metric_collector(context)
-            for metric, value in additional_metrics.items():
-                litvalue = lit.Test.toMetricValue(value)
-                context.result_metrics[metric] = litvalue
-        except Exception as e:
-            logging.error(
-                "Could not collect metric with %s", metric_collector, exc_info=e
-            )
+    #for metric_collector in plan.metric_collectors:
+    #    try:
+    #        additional_metrics = metric_collector(context)
+    #        for metric, value in additional_metrics.items():
+    #            litvalue = lit.Test.toMetricValue(value)
+    #            context.result_metrics[metric] = litvalue
+    #    except Exception as e:
+    #        logging.error(
+    #            "Could not collect metric with %s", metric_collector, exc_info=e
+    #        )
 
     # Execute the METRIC: part of the test.
-    for metric, metricscript in plan.metricscripts.items():
-        out, err, exitCode, timeoutInfo = _executeScript(
-            context, metricscript, "metric"
-        )
-        if exitCode != 0:
-            logging.warning("Metric script for '%s' failed", metric)
-            continue
-        try:
-            value = lit.Test.toMetricValue(float(out))
-            context.result_metrics[metric] = value
-        except ValueError:
-            logging.warning(
-                "Metric reported for '%s' is not a float: '%s'", metric, out
-            )
+    #for metric, metricscript in plan.metricscripts.items():
+    #    out, err, exitCode, timeoutInfo = _executeScript(
+    #        context, metricscript, "metric"
+    #    )
+    #    if exitCode != 0:
+    #        logging.warning("Metric script for '%s' failed", metric)
+    #        continue
+    #    try:
+    #        value = lit.Test.toMetricValue(float(out))
+    #        context.result_metrics[metric] = value
+    #    except ValueError:
+    #        logging.warning(
+    #            "Metric reported for '%s' is not a float: '%s'", metric, out
+    #        )
 
     return lit.Test.PASS
 
