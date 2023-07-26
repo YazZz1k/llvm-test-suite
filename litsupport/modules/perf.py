@@ -13,6 +13,7 @@ def _mutateCommandLine(context, commandline):
         "perf",
         [
             "record",
+            "-g",
             "-e",
             context.config.perf_profile_events,
             "-o",

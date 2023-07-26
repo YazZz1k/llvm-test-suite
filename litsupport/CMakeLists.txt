@@ -14,6 +14,7 @@ set(LITSUPPORT_FILES
   modules/__init__.py
   modules/microbenchmark.py
   modules/perf.py
+  modules/gprof-fcount.py
   modules/profilegen.py
   modules/remote.py
   modules/run.py
