@@ -1,3 +1,8 @@
+# Disable tests
+if(TEST_SUITE_BENCH_SAMPLE)
+  return()
+endif()
+
 # We need at least clang 3.9 to process the bitcode here.
 if(CMAKE_C_COMPILER_ID STREQUAL "Clang" AND
     CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND

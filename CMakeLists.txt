@@ -312,6 +312,7 @@ if(TEST_SUITE_COLLECT_COMPILE_TIME)
   set(CMAKE_CXX_LINK_EXECUTABLE "${CMAKE_BINARY_DIR}/tools/timeit --summary <TARGET>.link.time ${CMAKE_CXX_LINK_EXECUTABLE}")
 endif()
 
+option(TEST_SUITE_BENCH_SAMPLE "Run only few set of benchmarks" OFF)
 option(TEST_SUITE_BENCHMARKING_ONLY "Only run the benchmarking only subset" OFF)
 
 option(TEST_SUITE_COLLECT_STATS "Collect LLVM statistics" OFF)

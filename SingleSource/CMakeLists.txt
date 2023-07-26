@@ -1,5 +1,5 @@
 add_subdirectory(Benchmarks)
-if(NOT TEST_SUITE_BENCHMARKING_ONLY)
+if(NOT TEST_SUITE_BENCHMARKING_ONLY AND NOT TEST_SUITE_BENCH_SAMPLE)
   add_subdirectory(UnitTests)
   add_subdirectory(Regression)
 endif()

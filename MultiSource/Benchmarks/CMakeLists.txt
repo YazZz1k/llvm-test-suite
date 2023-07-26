@@ -1,3 +1,10 @@
+# Enable only 7zip benchmark
+if(TEST_SUITE_BENCH_SAMPLE)
+  add_subdirectory(7zip)
+  return()
+endif()
+
+
 add_subdirectory(ASCI_Purple)
 add_subdirectory(ASC_Sequoia)
 add_subdirectory(BitBench)

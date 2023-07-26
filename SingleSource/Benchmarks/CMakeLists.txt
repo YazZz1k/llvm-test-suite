@@ -1,3 +1,9 @@
+# Enable only Misc-C++ benchmarks
+if(TEST_SUITE_BENCH_SAMPLE)
+  add_subdirectory(Misc-C++)
+  return()
+endif()
+
 add_subdirectory(Adobe-C++)
 add_subdirectory(BenchmarkGame)
 add_subdirectory(CoyoteBench)
